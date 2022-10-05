@@ -1,0 +1,37 @@
+network Unknown {
+}
+variable BURGLARY {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable EARTHQUAKE {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable ALARM {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable JOHNCALLS {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable MARYCALLS {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+probability ( BURGLARY ) {
+  table 0.001, 0.999;
+}
+probability ( EARTHQUAKE ) {
+  table 0.002, 0.998;
+}
+probability ( ALARM | BURGLARY, EARTHQUAKE ) {
+  (TRUE, TRUE) 0.95, 0.05;
+  (FALSE, TRUE) 0.29, 0.71;
+  (TRUE, FALSE) 0.94, 0.06;
+  (FALSE, FALSE) 0.001, 0.999;
+}
+probability ( JOHNCALLS | ALARM ) {
+  (TRUE) 0.9, 0.1;
+  (FALSE) 0.05, 0.95;
+}
+probability ( MARYCALLS | ALARM ) {
+  (TRUE) 0.7, 0.3;
+  (FALSE) 0.01, 0.99;
+}
